@@ -1,0 +1,65 @@
+﻿@model IEnumerable<NewPharmacy.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Products</h2>
+
+<p>
+    @if (ViewBag.CurrentUser.UserLevel.ToString() == "Admin")
+    {
+        @Html.ActionLink("Add Product", "Create")
+    }
+</p>
+
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="container-fluid pb-image-container">
+            <div class="col-md-2">
+                <img src="@item.ImagePath" width="100%" height="30" class="img-thumbnail" alt="Cinque Terre">
+            </div>
+            <div class="col-md-8">
+                <h2>@Html.ActionLink(item.Name, "Details", new { Id = item.Id }, null)</h2>
+                <p>@Html.DisplayFor(modelItem => item.Description)</p>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .pb-image-container {
+        padding-top: 20px;
+        background: #fefeff;
+        font-family: Lato;
+    }
+
+    .pb-image {
+        border: 1px solid #e6e6e6;
+        padding: 5px;
+    }
+
+        .pb-image:hover {
+            background: #2c3e50;
+        }
+
+    .pb-image-frame {
+        transition: width 2s, height 2s;
+    }
+
+        .pb-image-frame:hover {
+            height: 200px;
+        }
+
+    .pb-row {
+        margin-bottom: 10px;
+    }
+
+    .menu-link {
+        height: 50px;
+    }
+</style>
+

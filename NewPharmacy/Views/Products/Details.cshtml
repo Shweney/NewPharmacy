@@ -1,0 +1,120 @@
+﻿@model NewPharmacy.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+
+                @{ 
+                    string cat = Model.Category.ToString().Replace("_", " ");
+                }
+
+                <dd>
+                    <p>@cat</p>
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.QuantityInStock)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.QuantityInStock)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+
+<div>
+
+    <table class="table">
+        <tr>
+            @using (Html.BeginForm("AddToCart", "Carts"))
+            {
+                <th class="col-md-1">
+                    <label class="control-label col-md-2">Quantity</label>
+                </th>
+                <th class="col-md-2">
+                    <input type="number" id="quantity" name="quantity" class="form-control" />
+                    @Html.Hidden("productId", Model.Id)
+                </th>
+                <th>
+                    <input type="submit" value="Add to Cart" class="btn btn-default" />
+                </th>
+                <th>
+                 
+                </th>
+                <th></th>
+            }
+        </tr>
+        </table>
+    </div>
+
+        <style>
+            .pb-image-container {
+                padding-top: 20px;
+                background: #fefeff;
+                font-family: Lato;
+            }
+
+            .pb-image {
+                border: 1px solid #e6e6e6;
+                padding: 5px;
+            }
+
+                .pb-image:hover {
+                    background: #2c3e50;
+                }
+
+            .pb-image-frame {
+                transition: width 2s, height 2s;
+            }
+
+                .pb-image-frame:hover {
+                    height: 200px;
+                }
+
+            .pb-row {
+                margin-bottom: 10px;
+            }
+
+            .menu-link {
+                height: 50px;
+            }
+        </style>

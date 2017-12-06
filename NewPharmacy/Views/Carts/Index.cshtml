@@ -1,0 +1,99 @@
+﻿@model NewPharmacy.Models.ViewModels.CartOrderViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cart</h2>
+
+@if (Model.PendingItems.Count < 1)
+{
+    <hr />
+    <p>Add some items to the cart to view here</p>
+    <div class="push"></div>
+}
+else
+{
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PendingItems.FirstOrDefault().Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PendingItems.FirstOrDefault().OrderQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PendingItems.FirstOrDefault().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PendingItems.FirstOrDefault().Total)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.PendingItems)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+    </tr>
+}
+
+    <tr>
+        <td>
+            
+        </td>
+        <td>
+           
+        </td>
+        <td>
+            <h4 align ="right">Sub-Total : </h4>
+        </td>
+        <td>
+            <h4>@Model.ItemsSubTotal</h4>
+        </td>
+    </tr>
+</table>
+<div class="checkout">
+    @Html.ActionLink("Check Out", "Checkout", "Carts", new { @class = "btn btn-primary btn-large" })
+</div>
+}
+
+<h4>Order History</h4>
+<hr />
+@if(Model.PendingOrders.Count < 1)
+{
+    <p>You do not have any pending orders on the way</p>
+}
+else
+{
+    foreach(var item in Model.PendingOrders)
+    {
+        <p>@item.OrderedDate - $ @item.SubTotal</p>
+        <br />
+    }
+}
+
+<style>
+    .checkout {
+        text-align: right;
+        margin-right: 190px;
+    }
+
+    .push {
+        height: 100px; /* .push must be the same height as .footer */
+    }
+</style>
+
